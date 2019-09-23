@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+ <!-- Person 객체 생성  -->
+<bean id="person" class="com.test.di04.Person">
+	<constructor-arg>
+		<value>홍길동</value>
+	</constructor-arg>
+	<constructor-arg>
+		<value>남자</value>
+	</constructor-arg>
+	<constructor-arg>
+		<value>27</value>
+	</constructor-arg>
+	<constructor-arg>
+		<value>881212-1234567</value>
+	</constructor-arg>	
+</bean>
+<bean id="person2" class="com.test.di04.Person">
+	<property name="name" value="유관순"></property>
+	<property name="gender" value="유관순"></property>
+	<property name="age" value="유관순"></property>
+	<property name="juminNo" value="유관순"></property>
+</bean>
+
+<bean id="personInfo" class="com.test.di04.PersonInfo">
+	<constructor-arg>
+	<ref bean="person2"/> <!-- person이라는 객체를 참조 한다.  -->
+	</constructor-arg>
+</bean>
+
+
+</beans>
