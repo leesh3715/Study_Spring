@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+
+<bean id="executor" class="com.sist.anno03.Executor"/>
+
+<bean id="worker" class="com.sist.anno03.Worker">
+	<qualifier value="main"></qualifier>
+</bean>
+
+<bean id="worker2" class="com.sist.anno03.Worker"/>
+<!-- ///////////////////////////////////////////////////////////////////////////////// -->
+<bean id="boy1" class="com.sist.anno03.Boy">
+	<qualifier value="Rony"></qualifier>
+	<property name="name" value="rony"/>
+	<property name="age" value="20"/>
+</bean>
+<bean id="boy2" class="com.sist.anno03.Boy">
+	<qualifier value="Tony"></qualifier>
+	<property name="name" value="tony"/>
+	<property name="age" value="22"/>
+</bean>
+
+<bean id="student" class="com.sist.anno03.Student"/>
+</beans>
