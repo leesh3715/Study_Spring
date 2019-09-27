@@ -1,4 +1,4 @@
-package com.sist.jdbc01;
+package com.spring.jdbc01;
 
 import java.text.DateFormat;
 import java.util.Date;
