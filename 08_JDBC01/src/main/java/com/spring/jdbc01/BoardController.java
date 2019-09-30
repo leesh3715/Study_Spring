@@ -1,9 +1,12 @@
 package com.spring.jdbc01;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,10 +51,25 @@ public class BoardController {
 		return "board_editForm";
 	}
 	@RequestMapping("/board_edit_ok.do")
-	public String modifyOk(BoardDTO dto, Model model, @RequestParam("dbpwd") String dbpwd) {
-		System.out.println(dbpwd);
-		this.dao.updateBoard(dto, dbpwd);
-		return "redirect:board_cont.do?no="+dto.getBoard_no();
+	public String modifyOk(BoardDTO dto, Model model, @RequestParam("dbpwd") String dbpwd, HttpServletResponse response) throws IOException {
+		String returnS = null;
+		// model 객체는 값을 저장하여 넘겨 줄때 사용하기 때문에 없어도 됨
+		if(dbpwd.equals(dto.getBoard_pwd())){
+			this.dao.updateBoard(dto);
+			/*
+			 * // 스크립트 알림을 위해서, 메서도 리턴이 void 일때 스크립트 태그를 통해서 리턴해준다.
+			 * response.setContentType("text/html; charset=UTF-8"); PrintWriter out =
+			 * response.getWriter(); out.println("<script>");
+			 * out.println("alert('게시글 수정 성공')");
+			 * out.println("location.href='board_cont.do?no="+dto.getBoard_no());
+			 * out.println("</script>");
+			 */
+			returnS = "redirect:board_cont.do?no=" + dto.getBoard_no(); 
+			return returnS;			
+		} else {
+			returnS = "redirect:board_list.do";
+			return returnS;
+		}
 	}
 	
 	@RequestMapping("/board_delete.do")
@@ -63,7 +81,15 @@ public class BoardController {
 	
 	@RequestMapping("/board_delete_ok.do")
 	public String deleteForm(BoardDTO dto, Model model, @RequestParam("userpwd") String userpwd) {
-		this.dao.deleteBoard(userpwd, dto);
-		return "redirect:board_list.do";
+		String returnS = null;
+		if(userpwd.equals(dto.getBoard_pwd())) {
+			this.dao.deleteBoard(userpwd, dto);
+			returnS ="redirect:board_list.do"; 
+			return returnS;
+		} else { 
+			returnS ="redirect:board_cont.do?no=" + dto.getBoard_no(); 
+			return returnS;
+		}
+		
 	}
 }

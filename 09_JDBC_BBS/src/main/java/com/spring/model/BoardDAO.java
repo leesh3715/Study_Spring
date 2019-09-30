@@ -14,8 +14,10 @@ public interface BoardDAO {
 	List<BoardDTO> getBoardList();
 	void insertBoard(BoardDTO dto);
 	BoardDTO boardCont(int no);
-	void readCount(int no);
+	
+	void readCount(int no); // 조회수 증가
 	void updateBoard(BoardDTO dto);
 	void deleteBoard(String userpwd, BoardDTO dto);
-	
+	void replyUpdate(int no, int board_step); // 게시판의 글의 step을 증가시키는 메서드
+	void replyBoard(BoardDTO dto); // 게시판의 답변글을 추가하는 메서드
 }

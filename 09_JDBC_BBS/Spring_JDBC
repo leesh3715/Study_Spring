@@ -1,0 +1,81 @@
+JDBC(Java DataBase Connectivity)
+- JDBC는 DB에 접근할 수 있도록 java에서 제공하는 API이다.
+- JDBC는 데이터베이스에서 자료를 쿼리하거나 업데이트 하는 방법을 제공한다.
+- JDBC API의 문제점
+	* 쿼리를 실행하기 전과 후에 많은 양의 코드를 작성 해야 한다.
+	예) 오라클 데이터베이스 로딩, DB와 연결 생성, 명령문(쿼리문), ResultSet 연결, 나머지 닫기 등등
+	* 데이터베이스 로직에서 예외 처리 코드를 수행 해야한다.
+	* 이러한 코드를 메서드 호출 시 마다 반복적으로 작성 해야한다.
+	
+
+Spring JDBCTemplate 이란?
+- JDBCTemplate은 Spring JDBC 접근 방법 중 하나로, 내부적으로 JDBC API를 사용하지만 위의 내용과 같은 문제점을 제거한 형태로 Spring에서 제공하는 Class이다.
+	
+	Spring JDBC 하는 일
+	* Connection 열기와 닫기
+	* PreparedStatement 준비와 닫기
+	* PreparedStatement 실행
+	* ResultSet Loop 처리
+	* Exception 처리
+	* Transaction 처리
+- Spring JDBC에서 개발자가 할 일은 핵심적으로 해야 할 작업만 처리 해 주면 나머지는 Spring FrameWork에서 알아서 처리해준다.
+
+- DataSource 란?
+	- DataSource는 JDBC 명세서의 일부분이면서 일반적인 연결공장임.
+	즉, DB와 관계된 connection(DBCP 방식) 정보를 담고 있음.
+	* DB 종류(oracle.jdbc.driver.OracleDriver)
+	* url 정보(jdbc:oracle:thin:@localhost:1521:XE)
+	* 계정 이름(web)
+	* 계정 비밀번호
+	
+- Spring JDBCTemplate 클래스를 사용하기 위해서는 pom.xml 파일에 아래와 같은 라이브러리를 등록해 주어야한다.
+	<dependency>
+		<groupId>org.springframework</groupId>
+		<artifactId>spring-jdbc</artifactId>
+		<version>${org.springframework-version}</version>
+	</dependency>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# server/ context.xml 에서 설정할 것 
+<Resource
+    	name="jdbc/myoracle"
+    	auth="Container"
+    	type="javax.sql.DataSource"
+    	driverClassName="oracle.jdbc.driver.OracleDriver"
+    	url="jdbc:oracle:thin:@lacalhost:1521:XE"
+    	username="web"
+    	password="1111"
+    	maxActive="200"
+    	maxIdle="100"/>
+    	
+    	
+C:\oraclexe\app\oracle\product\11.2.0\server\jdbc\lib
+
+-> WEB-INF/lib 디렉토리 안에 ojdbc6.jar 추가
+

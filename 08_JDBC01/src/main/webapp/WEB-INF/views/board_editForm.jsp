@@ -25,7 +25,7 @@
 				<tr>
 					<tr>
 						<th>작성자</th>
-						<td>${dto.getBoard_writer() }"</td>
+						<td>${dto.getBoard_writer() }</td>
 					</tr>
 					<tr>
 						<th>글 제목</th>
@@ -33,7 +33,7 @@
 					</tr>
 					<tr>
 						<th>글 내용</th>
-						<td><textarea rows="8" cols="30" name="board_cont">${dto.getBoard_cont() }"</textarea></td>
+						<td><textarea rows="8" cols="30" name="board_cont">${dto.getBoard_cont() }</textarea></td>
 					</tr>
 					<tr>
 						<th>비밀번호</th>

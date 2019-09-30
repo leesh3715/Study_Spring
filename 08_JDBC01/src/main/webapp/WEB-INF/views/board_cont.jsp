@@ -31,7 +31,7 @@
 				</tr>
 				<tr>
 					<th>글 내용</th>
-					<td><textarea rows="8" cols="30" readonly>${dto.getBoard_cont() }"</textarea></td>
+					<td><textarea rows="8" cols="30" readonly>${dto.getBoard_cont() }</textarea></td>
 				</tr>
 				<tr>
 					<th>조회수</th>
