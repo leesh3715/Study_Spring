@@ -17,19 +17,19 @@
 		<table border="1" width="400" cellspacing="0">
 			<c:set var="dto" value="${Edit }" />
 			<c:if test="${!empty dto }">
-				<input type="hidden" value="${dto.getBoard_no() }" name="no">
+				<input type="hidden" value="${dto.getBoard_no() }" name="board_no">
 				<input type="hidden" value="${dto.getBoard_pwd() }" name="dbpwd">
 				<tr>
 					<th>작성자</th>
-					<td><input name="writer" value="${dto.getBoard_writer() }"></td>
+					<td><input name="board_writer" value="${dto.getBoard_writer() }"></td>
 				</tr>
 				<tr>
 					<th>글제목</th>
-					<td><input name="title" value="${dto.getBoard_title() }"></td>
+					<td><input name="board_title" value="${dto.getBoard_title() }"></td>
 				</tr>
 				<tr>
 					<th>글내용</th>
-					<td><textarea rows="8" cols="30" name="cont">${dto.getBoard_cont() }</textarea></td>
+					<td><textarea rows="8" cols="30" name="board_cont">${dto.getBoard_cont() }</textarea></td>
 				</tr>
 				<tr>
 					<th>조회수</th>
@@ -41,7 +41,7 @@
 				</tr>
 				<tr>
 					<th>비밀번호</th>
-					<td><input type="password" name="pwd" value=""></td>
+					<td><input type="password" name="board_pwd" value=""></td>
 				</tr>
 				
 			</c:if>

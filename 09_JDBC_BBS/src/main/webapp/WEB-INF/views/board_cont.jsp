@@ -47,7 +47,7 @@
 			<td colspan="2" align="center">
 			<input type="button" value="수정" onclick="location.href='board_edit.do?no=${dto.getBoard_no()}'">
 			<input type="button" value="삭제" onclick="location.href='board_delete.do?no=${dto.getBoard_no()}'">
-			<input type="button" value="답변" onclick="location.href='reply.do?no=${dto.getBoard_no()}'">
+			<input type="button" value="답변" onclick="location.href='board_reply.do?no=${dto.getBoard_no()}'">
 			<input type="button" value="목록" onclick="location.href='select.do'">
 			</td>
 			</tr>

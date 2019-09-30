@@ -21,7 +21,7 @@ public class BoardDAOImpl implements BoardDAO {
 	@Override
 	public List<BoardDTO> getBoardList() { // 전체 게시판을 조회하는 메서드
 		List<BoardDTO> list = null;
-		sql = "select * from jsp_bbs order by board_no desc";
+		sql = "select * from jsp_bbs order by board_group desc, board_step";
 		
 		return list // list에 dto 객체가 순차적으로 들어감
 				= template.query(sql, new RowMapper<BoardDTO>() {	// query 메서드는 반환 타입이 List타입
@@ -82,21 +82,21 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void readCount(int no) {
-		/*
-		 * sql = "update board set board_hit = board_hit + 1 where board_no = ?";
-		 * template.update(sql, new PreparedStatementSetter() {
-		 * 
-		 * @Override public void setValues(PreparedStatement ps) throws SQLException {
-		 * ps.setInt(1, no); } });
-		 */
+	public void readCount(final int no) {
+		
+		  sql = "update jsp_bbs set board_hit = board_hit + 1 where board_no = ?";
+		  template.update(sql, new PreparedStatementSetter() {
+		  
+		  @Override public void setValues(PreparedStatement ps) throws SQLException {
+		  ps.setInt(1, no);
+		  } });
+		 
 	}
 
 	@Override
 	public void updateBoard(final BoardDTO dto) {
 		sql = "update jsp_bbs set board_writer = ?, board_title = ?, board_cont = ? where board_no = ?";
 		template.update(sql, new PreparedStatementSetter() {
-			
 			@Override
 			public void setValues(PreparedStatement ps) throws SQLException {
 				ps.setString(1, dto.getBoard_writer());
@@ -109,23 +109,45 @@ public class BoardDAOImpl implements BoardDAO {
 	}
 
 	@Override
-	public void deleteBoard(String userpwd, BoardDTO dto) {
-		// TODO Auto-generated method stub
+	public void deleteBoard(final BoardDTO dto) {
+		sql = "delete from jsp_bbs where board_no = ?";
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, dto.getBoard_no());
+			}
+		});
+	}
+
+	@Override
+	public void replyUpdate(final int no, final int board_step) { //jsp_bbs 게시판의 글의 step을 하나 증가 시키는 메서드
+		sql = "update jsp_bbs set board_step = board_step + 1 where board_group = ? and board_step > ?";
+		template.update(sql, new PreparedStatementSetter() {
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setInt(1, no);
+				ps.setInt(2, board_step);
+			}
+		});
 		
 	}
 
 	@Override
-	public void replyUpdate(int no, int board_step) {
-		// TODO Auto-generated method stub
-		
+	public void replyBoard(final BoardDTO dto) { // jsp_bbs 게시판의 답변글을 추가하는 메서드
+		sql = "insert into jsp_bbs values(bbs_seq.nextval,?,?,?,?,default,sysdate,?,?,?)";
+		template.update(sql, new PreparedStatementSetter() {
+			
+			@Override
+			public void setValues(PreparedStatement ps) throws SQLException {
+				ps.setString(1, dto.getBoard_writer());
+				ps.setString(2, dto.getBoard_title());
+				ps.setString(3, dto.getBoard_cont());
+				ps.setString(4, dto.getBoard_pwd());
+				ps.setInt(5, dto.getBoard_group());
+				ps.setInt(6, dto.getBoard_step() + 1); // 0은 자체 원래 글을 의미하고, 1을 추가함으로 답변글
+				ps.setInt(7, dto.getBoard_indent() + 1);				
+			}
+		});		
 	}
-
-	@Override
-	public void replyBoard(BoardDTO dto) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	
 
 }

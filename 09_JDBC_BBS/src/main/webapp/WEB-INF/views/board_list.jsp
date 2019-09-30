@@ -13,7 +13,7 @@
 			<h3>JSP_BBS 테이블 게시판 전체 리스트</h3>
 		<hr width="50%" color="red">
 		
-		<table border="1" width="600" cellspacing="0">
+		<table border="1" width="80%" cellspacing="0">
 		<tr>
 			<th>글번호</th> <th>글제목</th> <th>조회수</th> <th>작성일자</th>
 			<th>group</th> <th>step</th> <th>indent</th>
@@ -25,7 +25,7 @@
 			<tr>
 			<td>${dto.getBoard_no() }</td>
 			<td>
-			<c:forEach begin="1" end="${dto.getBoard_indent() }">☞</c:forEach>
+			<c:forEach begin="1" end="${dto.getBoard_indent() }">☞ </c:forEach>
 			<a href="board_cont.do?no=${dto.getBoard_no() }">${dto.getBoard_title() }</a></td>
 			<td>${dto.getBoard_hit() }</td>
 			<td>${dto.getBoard_date().substring(0,10) }</td>
