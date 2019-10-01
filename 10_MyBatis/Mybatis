@@ -1,0 +1,36 @@
+MyBatis
+ - 객체지향언어인 자바의 관계형 데이터베이스 프로그래밍을 좀 더 쉽게 할 수 있도록 도와주는 개발 프레임워크임
+ - 자바는 JDBC API를 제공해 주지만, 이런 JDBC를 이용하면 1개의 클레스에 반복된 코드가 존재, 한 파일에 java 언어와 sql 언어가 섞여 있어서 재 사용성 등이 안졿아지는 단점이 발생.
+ - MyBatis는 JDBC의 이러한 단점을 개선 했으며, 개발자가 작성한 SQL 명령어와 자바 객체를 매핑 해 주는 기능을 제공 하며, 기존에 사용하던 SQL 명령어를 재사용이 가능하게 함.
+ 
+ - 특징
+ 	- 한 두줄의 자바 코드로 DB 연동을 처리
+ 	- SQL 명렁어를 자바 코드에서 분리하여 XML 파일에 따로 관리
+ 	
+ - 스프링과 MyBatis를 연동하기 위한 라이브러리 설정 - pom.xml
+ 	1. MyBatis 프레임워크 추가 
+ 	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis</artifactId>
+    <version>3.4.6</version>
+</dependency>
+ 	
+ 	2. MyBatis-Spring 모듈 추가
+ 	<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis-spring -->
+<dependency>
+    <groupId>org.mybatis</groupId>
+    <artifactId>mybatis-spring</artifactId>
+    <version>1.3.2</version>
+</dependency>
+ 	
+ 	3. Spring-JDBC 라이브러리 추가
+ 	<!-- https://mvnrepository.com/artifact/org.springframework/spring-jdbc -->
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jdbc</artifactId>
+    <version>${org.springframework-version}</version>
+</dependency>
+
+https://blog.mybatis.org/p/products.html
+ 	
